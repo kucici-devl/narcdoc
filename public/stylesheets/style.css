@@ -1,0 +1,25 @@
+
+body {
+  padding: 50px;
+  font-family: 'BIZ UDGothic', sans-serif;
+/*  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/
+
+}
+.address{
+  width:400px;
+}
+.name{
+  width:300px;
+}
+.itemname{
+  width:400px
+}
+.itemcapacity, .itemnumber, .itemquantity{
+  width:60px;
+}
+.itemmemo{
+  width:200px;
+}
+a {
+  color: #00B7FF;
+}

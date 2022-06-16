@@ -1,0 +1,63 @@
+extends layout
+
+block content
+  h1= title
+  p 麻薬譲渡＆譲受確認書作成
+  //-  p Welcome to #{title}
+  form(method="post" action="topdf" autocomplete="off")
+    table(border="1")
+      tr
+        td 日付
+        td
+          input#year(type="text" size="4" name="year")
+          span 年
+          input#month(type="text" size="2" name="month")
+          span 月
+          input#day(type="text" size="2" name="day")
+          span 日
+          input#today(type="button" value="本日")
+      tr
+        td 自分名
+        td
+          input.name#myname(type="text" name="myname")
+      tr
+        td 自分住所
+        td
+          input.address#myaddress(type="text" name="myaddress")
+      tr
+        td 相手名
+        td
+          input.name(type="text" name="yourname")
+      tr
+        td 相手住所
+        td
+          input.address(type="text" name="youraddress")
+      tr
+        td 譲渡or譲受
+        td
+          input(type="radio" name="send_or_receive" value="send" checked=true)
+          span 譲渡
+          input(type="radio" name="send_or_receive" value="receive")
+          span 譲受
+    table(border="1")
+      tr
+        th 品名
+        th 容量
+        th 箇数
+        th 数量
+        th 備考
+      - for (var x=1;x<=4;x++)
+        tr
+          td
+            input.itemname(type="text" name=`itemname${x}`)
+          td
+            input.itemcapacity(type="text" name=`itemcapacity${x}`)
+          td
+            input.itemnumber(type="text" name=`itemnumber${x}`)
+          td
+            input.itemquantity(type="text" name=`itemquantity${x}`)
+          td
+            input.itemmemo(type="text" name=`itemmemo${x}`)
+    button#makepdf(type="submit") 書類作成
+    script(src='/javascripts/script.js')
+

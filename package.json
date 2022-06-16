@@ -1,0 +1,24 @@
+{
+  "name": "narcodoc",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "@pdf-lib/fontkit": "^1.1.1",
+    "@pdfme/generator": "^1.0.13",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "helmet": "^5.1.0",
+    "http-errors": "~1.6.3",
+    "moji": "^0.5.1",
+    "morgan": "~1.9.1",
+    "pdf-lib": "^1.17.1",
+    "pug": "^3.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}
