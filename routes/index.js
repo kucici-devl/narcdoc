@@ -54,10 +54,10 @@ router.post('/topdf',function(req,res,next){
   inputval.itemquantity3_1= req.body.itemquantity3;
   inputval.itemquantity4_1= req.body.itemquantity4;
 
-  inputval.itemmemo1_1= req.body.itemmemo1;
-  inputval.itemmemo2_1= req.body.itemmemo2;
-  inputval.itemmemo3_1= req.body.itemmemo3;
-  inputval.itemmemo4_1= req.body.itemmemo4;
+  inputval.itemmemo1_1= req.body.itemtokurei1 +" "+req.body.itemmemo1;
+  inputval.itemmemo2_1= req.body.itemtokurei2 +" "+req.body.itemmemo2;
+  inputval.itemmemo3_1= req.body.itemtokurei3 +" "+req.body.itemmemo3;
+  inputval.itemmemo4_1= req.body.itemtokurei4 +" "+req.body.itemmemo4;
 
   console.log(JSON.stringify(inputval));
   //pdfme

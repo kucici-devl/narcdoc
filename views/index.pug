@@ -45,7 +45,7 @@ block content
         th 容量
         th 箇数
         th 数量
-        th 備考
+        th(colspan="2") 備考
       - for (var x=1;x<=4;x++)
         tr
           td
@@ -57,7 +57,27 @@ block content
           td
             input.itemquantity(type="text" name=`itemquantity${x}`)
           td
+            select.itemtokurei(name=`itemtokurei${x}`)
+              option(value="")
+              option(value="イ") イ
+              option(value="ロ") ロ
+          td
             input.itemmemo(type="text" name=`itemmemo${x}`)
     button#makepdf(type="submit") 書類作成
+    hr
+    div ※令和4年4月1日以降、上記の書類の記載事項として、以下のものが追加されているので注意してください。
+    a(href="https://www.pref.saitama.lg.jp/a0707/kourigyousya-jouto-kyoka.html",target="_blank") 参考
+
+    ul 
+      li 備考に麻薬及び向精神薬取締法施行規則第9条の2第1項第1号のイ、ロどちらに該当する譲受・譲渡であるか記載すること。
+      li 備考に製品番号を記載すること。
+    blockquote(style="border:1px solid;padding:10px;")
+      div （麻薬小売業者間での麻薬の譲渡しの許可申請の特例）
+      div 第九条の二　二以上の麻薬小売業者は、次に掲げる全ての要件を満たす場合に限り、前条の規定にかかわらず、次項に定める手続により共同して、法第二十四条第十二項第一号の規定による麻薬の譲渡しの許可を申請することができる。
+        ol(style="list-style-type: cjk-ideographic")
+          li いずれの麻薬小売業者も、次に掲げる場合に限り、麻薬を譲り渡そうとする者であること
+          ol(style="list-style-type:katakana-iroha")
+            li 共同して申請する他の麻薬小売業者がその在庫量の不足のため麻薬処方せんにより調剤することができない場合において、当該不足分を補足する必要があると認めるとき
+            li 麻薬卸売業者から譲り受けた麻薬であつて、その譲受けの日から九十日を経過したものを保管しているとき、又は麻薬卸売業者から譲り受けた麻薬について、その一部を法第二十四条第十一項若しくは第十二項の規定に基づき譲り渡した場合において、その残部であつて、その譲渡しの日から九十日を経過したものを保管しているとき
     script(src='/javascripts/script.js')
 
