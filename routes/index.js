@@ -1,3 +1,4 @@
+const { pbkdf2 } = require('crypto');
 var express = require('express');
 var router = express.Router();
 var moji = require('moji');
@@ -7,6 +8,36 @@ function h2z(str){
 }
 function z2h(str){
   return moji(str).convert('ZE','HE').convert('ZS','HS').convert('ZK','HK').toString();
+}
+
+async function drawpdflib(pdf,pos){
+  const {PDFDocument} = require("pdf-lib");
+  const pdfDoc = await PDFDocument.load(pdf);
+  const pages = pdfDoc.getPages();
+  if(pos <4){
+    for(var i=0;i<2;i++){
+      pages[i].drawLine({
+        start:{x:100,y:302-pos*24 -pos*2 },
+        end:{x:742,y:198},
+        thickness:1
+      });
+    }
+  }
+  const pdfBytes = await pdfDoc.save();
+  pdf = pdfBytes;
+/*  const pdfDoc = await PDFDocument.load(pdf);
+  const pages = pdfDoc.getPages();
+  pages[0].drawLine({
+    start: { x: 25, y: 75 },
+    end: { x: 125, y: 175 },
+    thickness: 2,
+    color: rgb(0.75, 0.2, 0.2),
+    opacity: 0.75,
+  });
+  const pdfBytes = await pdfDoc.save()
+  pdf = pdfBytes;
+*/
+  return pdf;
 }
 
 /* GET home page. */
@@ -96,17 +127,45 @@ res.setHeader('Content-Type', 'application/pdf');
 res.setHeader('Content-Disposition', 'inline; filename=mayakukakunin.pdf');
 file2.pipe(res);
 */
-/////////////
-//pdfをfileに出力せず、直接ブラウザへ送る
-// Send binary response from UInt8Array in Express.js https://stackoverflow.com/a/62657989
-    const stream = require("stream");
-    const readStream = new stream.PassThrough();
-    // Pass your output.docx buffer to this
-    readStream.end(pdf);
-    res.set("Content-disposition", 'inline; filename=' + "mayakukakunin.pdf");
-    res.set("Content-Type", "application/pdf");
-    readStream.pipe(res);
-/////////////
+    let items=0;
+    if(inputval.itemname4_1 != ""){
+      items=4;
+    }else if(inputval.itemname3_1 != ""){
+      items=3;
+    }else if(inputval.itemname2_1 != ""){
+      items=2;
+    }else if(inputval.itemname1_1 != ""){
+      items=1;
+    }
+   promise_data = drawpdflib(pdf,items);
+   promise_data.then(function(data){
+    // const {PDFDocument,rgb} = require("pdf-lib");
+    // PDFDocument.load(pdf).then((pdfDoc)=>{
+    //   const pages = pdfDoc.getPages();
+    //   if(items <4){
+    //     for(var i=0;i<2;i++){
+    //       pages[i].drawLine({
+    //         start:{x:100,y:302-items*24 -items*2 },
+    //         end:{x:742,y:198},
+    //         thickness:1
+    //       });
+    //     }
+    //   }
+      // pdfDoc.save().then((data)=>{
+        /////////////
+        //pdfをfileに出力せず、直接ブラウザへ送る
+        // Send binary response from UInt8Array in Express.js https://stackoverflow.com/a/62657989
+        const stream = require("stream");
+        const readStream = new stream.PassThrough();
+        // Pass your output.docx buffer to this
+        readStream.end(data);
+        res.set("Content-disposition", 'inline; filename=' + "mayakukakunin.pdf");
+        res.set("Content-Type", "application/pdf");
+        readStream.pipe(res);
+        /////////////
+
+      });
+    // });
   });
 
 });
